@@ -5,11 +5,11 @@ module Text.SlamSearch.Parser.Tokens
   , keyChars
   ) where
 
-import Prelude
+import Prelude (class Eq, class Show, ($), pure, (<$>), (==), (<>), bind)
 
-import Text.Parsing.Parser
-import Text.Parsing.Parser.Combinators
-import Text.Parsing.Parser.String
+import Text.Parsing.Parser (ParseError, Parser, runParser, fail)
+import Text.Parsing.Parser.Combinators (choice, between, try)
+import Text.Parsing.Parser.String (string, noneOf, anyChar)
 
 import Control.Apply ((<*))
 import Control.Alt ((<|>))
@@ -52,7 +52,7 @@ rawString = do
   cs <- many $ noneOf keyChars
   case cs of
     Nil -> fail "incorrect raw string"
-    cs -> pure $ fromCharArray $ fromList cs
+    cs' -> pure $ fromCharArray $ fromList cs'
 
 slashed :: Parser String String
 slashed = do
@@ -70,7 +70,7 @@ quotedString = do
     cs <- many quotedSymbol
     case cs of
       Nil -> fail "incorrect quoted string"
-      cs -> pure $ fold cs
+      cs' -> pure $ fold cs'
 
 data Token
   = Text String

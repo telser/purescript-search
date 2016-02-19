@@ -2,14 +2,14 @@ module Test.Check
   ( check
   ) where
 
-import Prelude
+import Prelude (Unit, show, (<>))
 
 import Control.Monad.Eff (Eff())
-import Data.Either
-import Test.StrongCheck
+import Data.Either (Either(Right, Left))
+import Test.StrongCheck (Result(Failed), quickCheck, (===))
 import Text.SlamSearch (mkQuery)
 import Text.SlamSearch.Printer (strQuery)
-import Test.Check.Gen
+import Test.Check.Gen (QueryWrapper(QueryWrapper))
 import Test.Effects (TEST_EFFECTS())
 
 checkFn :: QueryWrapper -> Result

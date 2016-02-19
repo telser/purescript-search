@@ -1,6 +1,6 @@
 module Text.SlamSearch.Parser (term) where
 
-import Prelude
+import Prelude (($), pure, not, bind, (<$>), return, const)
 
 import Control.Apply ((*>))
 import Control.Alt ((<|>))
@@ -10,9 +10,9 @@ import Text.SlamSearch.Types as S
 import Text.SlamSearch.Parser.Tokens as Tk
 
 import Text.Parsing.Parser.Pos (initialPos, Position())
-import Text.Parsing.Parser as P
-import Text.Parsing.Parser.Combinators as P
-import Text.Parsing.Parser.Token as P
+import Text.Parsing.Parser (Parser, fail) as P
+import Text.Parsing.Parser.Combinators (try, (<?>), option, choice) as P
+import Text.Parsing.Parser.Token (token, match, when) as P
 
 notCarePos :: forall a. a -> Position
 notCarePos = const initialPos
@@ -27,9 +27,9 @@ text = do
 label :: P.Parser (List Tk.Token) S.Label
 label = do
   txt <- P.try do
-    txt <- text
+    txt' <- text
     P.match notCarePos Tk.Colon
-    pure txt
+    pure txt'
   pure $ S.Common txt
 
 meta :: P.Parser (List Tk.Token) S.Label

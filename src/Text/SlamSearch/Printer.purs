@@ -5,12 +5,12 @@ module Text.SlamSearch.Printer
   , strQuery
   ) where
 
-import Prelude
-import Data.Foldable (foldr, Foldable, foldMap)
+import Prelude ((<>), (<$>), ($), (>))
+import Data.Foldable (foldr, class Foldable, foldMap)
 import Data.Array (intersect, length)
 import Data.List (List())
 import Data.String (trim, toCharArray)
-import Text.SlamSearch.Types
+import Text.SlamSearch.Types (SearchQuery, Label(Meta, Common), Predicate(Range, Like, Ne, Lte, Lt, Gte, Gt, Eq, Contains), Term(Term), Value(Tag, Text))
 import Text.SlamSearch.Parser.Tokens (keyChars)
 import Data.Semiring.Free (runFree)
 

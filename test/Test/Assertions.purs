@@ -2,11 +2,11 @@ module Test.Assertions
   ( assertions
   ) where
 
-import Prelude
+import Prelude (Unit, ($), (==), bind, pure, const, void, map, (<$>), not)
 
 import Control.Monad (when)
 import Control.Monad.Eff (Eff())
-import Control.Monad.Eff.Exception
+import Control.Monad.Eff.Exception (error, throwException)
 import Control.Monad.Eff.Console (print)
 import Data.Foldable (traverse_)
 import Data.Either (Either(), either)
@@ -15,8 +15,8 @@ import Data.List (List(..), singleton, toList)
 import Data.Tuple (Tuple(..))
 import Data.Semiring.Free (runFree)
 
-import Text.SlamSearch
-import Text.SlamSearch.Types
+import Text.SlamSearch (mkQuery)
+import Text.SlamSearch.Types (SearchQuery, Label(Common, Meta), Predicate(Contains, Like, Range, Gt), Term(Term), Value(Text, Tag))
 import Text.Parsing.Parser (ParseError())
 
 import Test.Effects (TEST_EFFECTS())

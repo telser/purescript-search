@@ -6,13 +6,13 @@ module Text.SlamSearch.Types
   , Value(..)
   ) where
 
-import Prelude
+import Prelude (class Show, class Eq, show, (<>), (==), ($), bind, (-), (<$>), pure, (&&), (<*>))
 import Data.Semiring.Free (Free())
 import Data.List (List(..), toList)
 import Data.String as Str
 import Data.Char as Ch
-import Test.StrongCheck as SC
-import Test.StrongCheck.Gen as SC
+import Test.StrongCheck (class Arbitrary, arbitrary) as SC
+import Test.StrongCheck.Gen (Gen, elements, chooseInt) as SC
 
 -- | SearchQuery is free semiring on Term where
 -- | `AND` operation is `*` and `OR` is `+`

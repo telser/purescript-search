@@ -2,9 +2,9 @@ module Test.Check.Gen
   ( QueryWrapper(..)
   ) where
 
-import Prelude
-import Test.StrongCheck.Gen
-import Test.StrongCheck
+import Prelude (one, (*), ($), pure, (<$>), bind)
+import Test.StrongCheck.Gen (vectorOf, chooseInt)
+import Test.StrongCheck (class Arbitrary, arbitrary)
 import Data.Semiring.Free (free)
 import Text.SlamSearch.Types (SearchQuery())
 import Data.Foldable (foldl)

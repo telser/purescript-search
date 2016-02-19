@@ -3,8 +3,8 @@ module Text.SlamSearch
   , check
   ) where
 
-import Prelude
-import Data.Semiring.Free
+import Prelude ((<<<), ($), flip, (>>=), map, (<$>), one, (*), not)
+import Data.Semiring.Free (Free, liftFree, free)
 import Data.Foldable (fold, foldl)
 import Data.Traversable (sequence)
 import Data.Either (Either())
@@ -13,7 +13,7 @@ import Data.String (split, trim)
 import Data.List (reverse, List(..), toList)
 import Data.Monoid.Disj as Dj
 
-import Text.SlamSearch.Types
+import Text.SlamSearch.Types (Term, SearchQuery)
 import Text.SlamSearch.Parser.Tokens as Tk
 import Text.SlamSearch.Parser as S
 import Text.Parsing.Parser as P
